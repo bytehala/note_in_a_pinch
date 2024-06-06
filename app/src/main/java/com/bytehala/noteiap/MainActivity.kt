@@ -27,6 +27,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import com.bytehala.noteiap.note.view.NotesScreen
 import com.bytehala.noteiap.ui.custom.CustomButtonExample
 import com.bytehala.noteiap.ui.custom.SquareButton
 import com.bytehala.noteiap.ui.theme.NoteInAPinchTheme
@@ -67,10 +68,14 @@ fun MainContent(names: List<String>) {
                 .fillMaxSize())
             {
                 Spacer(modifier = Modifier.height(8.dp))
-                GreetingList(names = names)
+                NotesScreen()
             }
-            AddButton(modifier = Modifier.align(Alignment.BottomStart).padding(16.dp))
-            PagingButtons(modifier = Modifier.align(Alignment.BottomEnd).padding(16.dp))
+            AddButton(modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(16.dp))
+            PagingButtons(modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(16.dp))
         }
     }
 }
