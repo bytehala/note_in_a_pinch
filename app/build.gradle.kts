@@ -65,6 +65,5 @@ dependencies {
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
-    implementation("androidx.compose.ui:ui-tooling-preview:1.6.7")
     debugImplementation(libs.androidx.ui.test.manifest)
 }
