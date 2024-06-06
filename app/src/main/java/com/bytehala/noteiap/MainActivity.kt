@@ -18,11 +18,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
+import com.bytehala.noteiap.ui.custom.CustomButtonExample
+import com.bytehala.noteiap.ui.custom.SquareButton
 import com.bytehala.noteiap.ui.theme.NoteInAPinchTheme
 
 class MainActivity : ComponentActivity() {
@@ -35,7 +39,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainContent(listOf("Android", "Jetpack Compose", "Kotlin"))
+                    MainContent(listOf("Androida", "Jetpack Compose", "Kotlin"))
                 }
             }
         }
@@ -51,20 +55,16 @@ fun MainContent(names: List<String>) {
                 .align(Alignment.BottomEnd)
                 .padding(16.dp)
         ) {
-            Button(onClick = { /* TODO: Handle button click */ }) {
-                Text("Button 1")
-            }
+            CustomButtonExample("<")
             Spacer(modifier = Modifier.width(8.dp))
-            Button(onClick = { /* TODO: Handle button click */ }) {
-                Text("Button 2")
-            }
+            CustomButtonExample(">")
         }
     }
 }
 
 @Composable
 fun GreetingList(names: List<String>) {
-    LazyColumn {
+    LazyColumn(modifier = Modifier.padding(32.dp)) {
         items(names) { name ->
             Greeting(name = name)
         }
@@ -73,13 +73,13 @@ fun GreetingList(names: List<String>) {
 
 @Composable
 fun Greeting(name: String) {
-    Text(text = "Hello, $name!")
+    Text(text = "Hello, $name!", fontSize = 6.em, maxLines = 1, overflow = TextOverflow.Ellipsis)
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, widthDp = 270, heightDp = 540)
 @Composable
 fun DefaultPreview() {
     NoteInAPinchTheme {
-        MainContent(names = listOf("Android", "Jetpack Compose", "Kotlin"))
+        MainContent(names = listOf("Android", "Jetpack Compose Bla bla bla", "Kotlin"))
     }
 }
