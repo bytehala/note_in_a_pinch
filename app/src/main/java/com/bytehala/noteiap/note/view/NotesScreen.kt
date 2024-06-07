@@ -1,5 +1,6 @@
 package com.bytehala.noteiap.note.view
 
+import InkTextField
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -8,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.bytehala.noteiap.database.AppDatabase
 import com.bytehala.noteiap.note.model.Note
@@ -21,7 +23,7 @@ fun NotesScreen() {
     val noteDao = db.noteDao()
     val notes: List<Note> by noteDao.getAllNotes().observeAsState(emptyList())
 
-    var newNote by remember { mutableStateOf("") }
+    var newNote by remember { mutableStateOf(TextFieldValue("")) }
     val coroutineScope = rememberCoroutineScope()
 
     Column(
@@ -37,11 +39,11 @@ fun NotesScreen() {
         )
         Spacer(modifier = Modifier.height(8.dp))
         Button(onClick = {
-            if (newNote.isNotBlank()) {
+            if (newNote.text.isNotBlank()) {
                 coroutineScope.launch(Dispatchers.IO) {
-                    val note = Note(content = newNote)
+                    val note = Note(content = newNote.text)
                     noteDao.insert(note)
-                    newNote = "" // Reset the state after insertion
+                    newNote = TextFieldValue("") // Reset the state after insertion
                 }
             }
         }) {
