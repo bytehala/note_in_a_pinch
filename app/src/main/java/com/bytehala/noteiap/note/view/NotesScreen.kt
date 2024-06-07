@@ -15,7 +15,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -40,13 +39,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
-import androidx.core.content.ContextCompat.startActivity
 import com.bytehala.noteiap.database.AppDatabase
 import com.bytehala.noteiap.note.model.Note
 import com.bytehala.noteiap.note.model.NoteDao
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun NotesScreen(notes: List<Note> = emptyList(), noteDao: NoteDao?) {
     val isPreview = LocalInspectionMode.current
@@ -76,6 +74,9 @@ fun NotesScreen(notes: List<Note> = emptyList(), noteDao: NoteDao?) {
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent,
                     disabledContainerColor = Color.Transparent,
+                    focusedIndicatorColor = Color.LightGray,
+                    unfocusedIndicatorColor = Color.LightGray,
+                    disabledIndicatorColor = Color.LightGray
                 )
             )
             if (newNote.isNotBlank() || isPreview) {
@@ -118,7 +119,6 @@ fun NoteTitleItem(title: String, onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-//            .height(IntrinsicSize.Min)
             .clickable { onClick() }
     ) {
         Text(

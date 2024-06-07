@@ -6,8 +6,11 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -75,35 +78,41 @@ fun EditNoteScreen(note: Note, onSave: (Note) -> Unit) {
                             updatedTimestamp = System.currentTimeMillis()
                         )
                         onSave(updatedNote)
-                    }) {
+                    }, modifier = Modifier.border(1.dp, Color.Gray, CircleShape)) {
                         Icon(Icons.Default.Done, contentDescription = "Save")
                     }
                 }
             )
         }
     ) { innerPadding ->
-        Column(modifier = Modifier.padding(innerPadding)) {
-            TextField(
-                value = title,
-                onValueChange = { title = it },
-                modifier = Modifier.padding(bottom = 8.dp),
-                textStyle = TextStyle(fontSize = 4.em),
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = Color.Transparent,
-                    unfocusedContainerColor = Color.Transparent,
-                    disabledContainerColor = Color.Transparent,
-                ),
-                maxLines = 1
-            )
+        Column(modifier = Modifier.padding(innerPadding).padding(horizontal = 16.dp)) {
+//            TextField(
+//                value = title,
+//                onValueChange = { title = it },
+//                modifier = Modifier.padding(bottom = 8.dp).fillMaxWidth(),
+//                textStyle = TextStyle(fontSize = 4.em),
+//                colors = TextFieldDefaults.colors(
+//                    focusedContainerColor = Color.Transparent,
+//                    unfocusedContainerColor = Color.Transparent,
+//                    disabledContainerColor = Color.Transparent,
+//                    focusedIndicatorColor = Color.LightGray,
+//                    unfocusedIndicatorColor = Color.LightGray,
+//                    disabledIndicatorColor = Color.LightGray,
+//                ),
+//                maxLines = 1
+//            )
             TextField(
                 value = content,
                 onValueChange = { content = it },
-                modifier = Modifier.padding(bottom = 8.dp),
+                modifier = Modifier.padding(bottom = 8.dp).fillMaxWidth(),
                 textStyle = TextStyle(fontSize = 3.em),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent,
                     disabledContainerColor = Color.Transparent,
+                    focusedIndicatorColor = Color.LightGray,
+                    unfocusedIndicatorColor = Color.LightGray,
+                    disabledIndicatorColor = Color.LightGray,
                 )
             )
         }
