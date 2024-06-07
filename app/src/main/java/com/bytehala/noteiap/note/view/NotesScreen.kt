@@ -8,9 +8,11 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.dp
 import com.bytehala.noteiap.NoteTitleItem
 import com.bytehala.noteiap.database.AppDatabase
@@ -34,30 +36,39 @@ fun NotesScreen() {
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        TextField(
-            value = newNote,
-            onValueChange = { newNote = it },
-            label = { Text("Quick Note") },
-            trailingIcon = {
-                IconButton(onClick = {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            TextField(
+                value = newNote,
+                onValueChange = { newNote = it },
+                label = { Text("Quick Note") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.TopStart),
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent,
+                    disabledContainerColor = Color.Transparent,
+                )
+            )
+            IconButton(
+                onClick = {
                     if (newNote.isNotBlank()) {
                         coroutineScope.launch(Dispatchers.IO) {
-                            val note = Note(content = newNote)
+                            val title = newNote.split("\n").first()
+                            val note = Note(title = title, content = newNote)
                             noteDao.insert(note)
-                            newNote = "" // Reset the state after insertion
+                            newNote = ""
                         }
                     }
-                }) {
-                    Icon(imageVector = Icons.Filled.Add, contentDescription = "Save Note")
-                }
-            },
-            modifier = Modifier.fillMaxWidth(),
-            colors = TextFieldDefaults.colors(
-                focusedContainerColor = Color.Transparent,
-                unfocusedContainerColor = Color.Transparent,
-                disabledContainerColor = Color.Transparent,
-            )
-        )
+                },
+                modifier = Modifier.align(Alignment.TopEnd)
+            ) {
+                Icon(imageVector = Icons.Default.Add, contentDescription = "Save Note")
+            }
+        }
         Spacer(modifier = Modifier.height(16.dp))
         LazyColumn {
             items(notes) { note ->

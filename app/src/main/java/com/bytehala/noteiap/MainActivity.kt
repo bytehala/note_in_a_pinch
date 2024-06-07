@@ -68,23 +68,9 @@ fun MainContent(names: List<String>) {
                 Spacer(modifier = Modifier.height(8.dp))
                 NotesScreen()
             }
-            AddButton(modifier = Modifier
-                .align(Alignment.BottomStart)
-                .padding(16.dp))
             PagingButtons(modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(16.dp))
-        }
-    }
-}
-
-@Composable
-fun AddButton(modifier: Modifier) {
-    Row(
-        modifier = modifier
-    ) {
-        SquareButton(onClick = { /* Handle click */ }) {
-            Text("+", fontSize = 4.em, overflow = TextOverflow.Visible)
         }
     }
 }
