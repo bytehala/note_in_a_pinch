@@ -1,5 +1,6 @@
 package com.bytehala.noteiap.note.view
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -13,21 +14,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.bytehala.noteiap.NoteTitleItem
+import androidx.compose.ui.unit.em
 import com.bytehala.noteiap.database.AppDatabase
 import com.bytehala.noteiap.note.model.Note
+import com.bytehala.noteiap.note.model.NoteDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NotesScreen() {
-    val context = LocalContext.current
-    val db = remember { AppDatabase.getDatabase(context) }
-    val noteDao = db.noteDao()
-    val notes: List<Note> by noteDao.getAllNotes().observeAsState(emptyList())
-
+fun NotesScreen(notes: List<Note> = emptyList(), noteDao: NoteDao?) {
     var newNote by remember { mutableStateOf("") }
     val coroutineScope = rememberCoroutineScope()
 
@@ -56,10 +55,10 @@ fun NotesScreen() {
             IconButton(
                 onClick = {
                     if (newNote.isNotBlank()) {
-                        coroutineScope.launch(Dispatchers.IO) {
+                        coroutineScope.launch {
                             val title = newNote.split("\n").first()
                             val note = Note(title = title, content = newNote)
-                            noteDao.insert(note)
+                            noteDao?.insert(note)
                             newNote = ""
                         }
                     }
@@ -72,9 +71,60 @@ fun NotesScreen() {
         Spacer(modifier = Modifier.height(16.dp))
         LazyColumn {
             items(notes) { note ->
-                NoteTitleItem(name = note.content)
-                Spacer(modifier = Modifier.height(24.dp)) // Add spacing between items
+                NoteTitleItem(title = note.title, onClick = { /* Open the a ctivity*/} )
+//                Spacer(modifier = Modifier.height(24.dp)) // Add spacing between items
             }
         }
     }
+}
+
+@Composable
+fun NoteTitleItem(title: String, onClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(12.dp)
+            .clickable { onClick() }
+    ) {
+        Text(
+            text = title,
+            fontSize = 4.em,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun NotesScreenPreview() {
+    val sampleNotes = listOf(
+        Note(
+            id = 1,
+            title = "Sample Note 1",
+            content = "This is the content of sample note 1."
+        ),
+        Note(
+            id = 2,
+            title = "Sample Note 2",
+            content = "This is the content of sample note 2."
+        ),
+        Note(
+            id = 3,
+            title = "Sample Note 3",
+            content = "This is the content of sample note 3."
+        )
+    )
+
+    NotesScreen(notes = sampleNotes, noteDao = null)
+}
+
+@Composable
+fun NotesScreenWrapper() {
+    val context = LocalContext.current
+    val db = remember { AppDatabase.getDatabase(context) }
+    val noteDao = db.noteDao()
+    val notes: List<Note> by noteDao.getAllNotes().observeAsState(emptyList())
+
+    NotesScreen(notes = notes, noteDao = noteDao)
 }

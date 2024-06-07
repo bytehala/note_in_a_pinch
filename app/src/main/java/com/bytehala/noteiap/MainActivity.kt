@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import com.bytehala.noteiap.note.view.NotesScreen
+import com.bytehala.noteiap.note.view.NotesScreenWrapper
 import com.bytehala.noteiap.ui.custom.SquareButton
 import com.bytehala.noteiap.ui.theme.NoteInAPinchTheme
 
@@ -66,7 +67,7 @@ fun MainContent(names: List<String>) {
                 .fillMaxSize())
             {
                 Spacer(modifier = Modifier.height(8.dp))
-                NotesScreen()
+                NotesScreenWrapper()
             }
             PagingButtons(modifier = Modifier
                 .align(Alignment.BottomEnd)
@@ -88,11 +89,6 @@ fun PagingButtons(modifier: Modifier = Modifier) {
             Text(">", fontSize = 4.em, overflow = TextOverflow.Visible)
         }
     }
-}
-
-@Composable
-fun NoteTitleItem(name: String) {
-    Text(text = "$name!", fontSize = 4.em, maxLines = 1, overflow = TextOverflow.Ellipsis)
 }
 
 @Preview(showBackground = true, widthDp = 270, heightDp = 540)
