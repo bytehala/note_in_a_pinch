@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,7 +27,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import com.bytehala.noteiap.note.view.NotesScreen
-import com.bytehala.noteiap.ui.custom.CustomButtonExample
 import com.bytehala.noteiap.ui.custom.SquareButton
 import com.bytehala.noteiap.ui.theme.NoteInAPinchTheme
 
@@ -107,18 +105,8 @@ fun PagingButtons(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun GreetingList(names: List<String>) {
-    LazyColumn(modifier = Modifier.padding(8.dp)) {
-        items(names) { name ->
-            Greeting(name = name)
-            Spacer(modifier = Modifier.height(24.dp)) // Add spacing between items
-        }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello, $name!", fontSize = 4.em, maxLines = 1, overflow = TextOverflow.Ellipsis)
+fun NoteTitleItem(name: String) {
+    Text(text = "$name!", fontSize = 4.em, maxLines = 1, overflow = TextOverflow.Ellipsis)
 }
 
 @Preview(showBackground = true, widthDp = 270, heightDp = 540)
