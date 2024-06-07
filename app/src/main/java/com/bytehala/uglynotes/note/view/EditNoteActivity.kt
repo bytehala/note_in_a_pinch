@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.bytehala.noteiap.note.view
+package com.bytehala.uglynotes.note.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -34,8 +34,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.lifecycle.lifecycleScope
-import com.bytehala.noteiap.database.AppDatabase
-import com.bytehala.noteiap.note.model.Note
+import com.bytehala.uglynotes.database.AppDatabase
+import com.bytehala.uglynotes.note.model.Note
 import kotlinx.coroutines.launch
 
 class EditNoteActivity : ComponentActivity() {

@@ -1,4 +1,4 @@
-package com.bytehala.noteiap.ui.theme
+package com.bytehala.uglynotes.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -38,7 +38,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun NoteInAPinchTheme(
+fun UglyNotesTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,

@@ -1,4 +1,4 @@
-package com.bytehala.noteiap.note.view
+package com.bytehala.uglynotes.note.view
 
 import android.content.Intent
 import androidx.compose.foundation.border
@@ -32,6 +32,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
@@ -39,9 +40,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
-import com.bytehala.noteiap.database.AppDatabase
-import com.bytehala.noteiap.note.model.Note
-import com.bytehala.noteiap.note.model.NoteDao
+import com.bytehala.uglynotes.database.AppDatabase
+import com.bytehala.uglynotes.note.model.Note
+import com.bytehala.uglynotes.note.model.NoteDao
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -49,6 +50,7 @@ import kotlinx.coroutines.launch
 fun NotesScreen(notes: List<Note> = emptyList(), noteDao: NoteDao?) {
     val isPreview = LocalInspectionMode.current
     val context = LocalContext.current
+    val focusManager = LocalFocusManager.current
     val swKeyboard = LocalSoftwareKeyboardController.current
     var newNote by remember { mutableStateOf("") }
     val coroutineScope = rememberCoroutineScope()
@@ -89,6 +91,7 @@ fun NotesScreen(notes: List<Note> = emptyList(), noteDao: NoteDao?) {
                                 noteDao?.insert(note)
                                 newNote = ""
                                 swKeyboard?.hide()
+                                focusManager.clearFocus()
                             }
                         }
                     },
@@ -107,6 +110,7 @@ fun NotesScreen(notes: List<Note> = emptyList(), noteDao: NoteDao?) {
                     val intent = Intent(context, EditNoteActivity::class.java).apply {
                         putExtra("note", note)
                     }
+                    focusManager.clearFocus()
                     context.startActivity(intent)
                 } )
             }

@@ -1,11 +1,11 @@
-package com.bytehala.noteiap.database
+package com.bytehala.uglynotes.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.bytehala.noteiap.note.model.Note
-import com.bytehala.noteiap.note.model.NoteDao
+import com.bytehala.uglynotes.note.model.Note
+import com.bytehala.uglynotes.note.model.NoteDao
 
 @Database(entities = [Note::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {

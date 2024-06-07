@@ -1,4 +1,4 @@
-package com.bytehala.noteiap
+package com.bytehala.uglynotes
 
 import org.junit.Test
 

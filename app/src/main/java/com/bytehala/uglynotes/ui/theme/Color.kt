@@ -1,4 +1,4 @@
-package com.bytehala.noteiap.ui.theme
+package com.bytehala.uglynotes.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

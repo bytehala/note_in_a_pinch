@@ -1,4 +1,4 @@
-package com.bytehala.noteiap.note.model
+package com.bytehala.uglynotes.note.model
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

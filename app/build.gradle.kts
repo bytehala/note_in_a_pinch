@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.bytehala.noteiap"
+    namespace = "com.bytehala.uglynotes"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.bytehala.noteiap"
+        applicationId = "com.bytehala.uglynotes"
         minSdk = 27
         targetSdk = 34
         versionCode = 1

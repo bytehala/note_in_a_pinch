@@ -1,4 +1,4 @@
-package com.bytehala.noteiap.note.model
+package com.bytehala.uglynotes.note.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
