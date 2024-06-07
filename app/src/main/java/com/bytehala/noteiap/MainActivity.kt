@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainContent(listOf("Android", "Jetpack Compose", "Kotlin"))
+                    MainContent()
                 }
             }
         }
@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainContent(names: List<String>) {
+fun MainContent() {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -69,24 +69,6 @@ fun MainContent(names: List<String>) {
                 Spacer(modifier = Modifier.height(8.dp))
                 NotesScreenWrapper()
             }
-            PagingButtons(modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .padding(16.dp))
-        }
-    }
-}
-
-@Composable
-fun PagingButtons(modifier: Modifier = Modifier) {
-    Row(
-        modifier = modifier
-    ) {
-        SquareButton(onClick = { /* Handle click */ }) {
-            Text("<", fontSize = 4.em, overflow = TextOverflow.Visible)
-        }
-        Spacer(modifier = Modifier.width(8.dp))
-        SquareButton(onClick = { /* Handle click */ }) {
-            Text(">", fontSize = 4.em, overflow = TextOverflow.Visible)
         }
     }
 }
@@ -95,6 +77,6 @@ fun PagingButtons(modifier: Modifier = Modifier) {
 @Composable
 fun DefaultPreview() {
     NoteInAPinchTheme {
-        MainContent(names = listOf("Android", "Jetpack Compose Bla bla bla", "Kotlin"))
+        MainContent()
     }
 }
